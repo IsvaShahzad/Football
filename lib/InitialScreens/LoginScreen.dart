@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import 'ForgotPasswordScreen.dart';
+import 'SignUpScreen.dart';
 
 class LoginScreen extends StatefulWidget {
-
-
   @override
-
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
@@ -27,7 +26,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> _loginWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+      final GoogleSignInAccount? googleSignInAccount =
+          await googleSignIn.signIn();
 
       if (googleSignInAccount != null) {
         // Successfully logged in
@@ -202,10 +202,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                           primary: Color(0xFFF44336),
                                         ),
                                         onPressed: () {
-                                          // Navigator.of(context).push(
-                                          //     MaterialPageRoute(
-                                          //         builder: (context) =>
-                                          //             ForgotPasswordScreen()));
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ForgotPasswordScreen()));
                                         }),
                                   ),
                                   Align(
@@ -253,7 +253,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               //       }
                                               //     } catch (e) {
                                               //       print(e);
-                                              //       // Display an error message to the user
+                                              // Display an error message to the user
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(
                                                 SnackBar(
@@ -372,7 +372,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                       Text("Don't have an account?"),
                                       TextButton(
                                         onPressed: () {
-                                          // Navigate to the sign-up page or perform sign-up logic
+                                          Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                          SignUpScreen()));
                                         },
                                         child: Text(
                                           "Sign up",

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'SplashScreen.dart';
+import 'InitialScreens/SplashScreen.dart';
 
 void main() async {
   if (kIsWeb || defaultTargetPlatform == TargetPlatform.macOS) {
