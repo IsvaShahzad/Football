@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import '../MainScreens/HomeScreen.dart';
-import 'ForgotPasswordScreen.dart';
-import 'SignUpScreen.dart';
+import './home_screen.dart';
+import './forgot_password_screen.dart';
+import './signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -41,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           image: DecorationImage(
               image: AssetImage("assets/images/greeb_login.jpeg"),
               fit: BoxFit.cover)),
@@ -55,8 +56,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 165.0),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 165.0),
                     ),
                     const Align(
                         alignment: Alignment.topLeft,
@@ -68,25 +69,20 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         )),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 30.0),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 30.0),
                     ),
                     Container(
-                        height: 380,
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          border: Border.all(
-                            color: Colors.transparent,
-                            width: 1.5,
-                          ),
-                          borderRadius: BorderRadius.all(Radius.zero),
+                          borderRadius: const BorderRadius.all(Radius.zero),
                           boxShadow: [
                             BoxShadow(
-                              color:
-                                  Colors.black.withOpacity(0.2), // Shadow color
+                              color: const Color.fromARGB(255, 101, 101, 101)
+                                  .withOpacity(0.2), // Shadow color
                               spreadRadius: 2, // Spread radius
                               blurRadius: 12, // Blur radius
-                              offset: Offset(
+                              offset: const Offset(
                                   0, 3), // Offset in (x,y) from the container
                             ),
                           ],
@@ -94,62 +90,61 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: SingleChildScrollView(
                           child: Padding(
                             padding:
-                                const EdgeInsets.symmetric(horizontal: 15.0),
+                                const EdgeInsets.symmetric(horizontal: 18.0),
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 22.0),
+                                  const Padding(
+                                    padding: EdgeInsets.only(top: 22.0),
                                     child: Text('Email',
                                         style: TextStyle(
                                             fontSize: 15,
                                             color: Color(0xFF000000),
                                             fontWeight: FontWeight.bold)),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 5.0),
+                                  const Padding(
+                                    padding: EdgeInsets.only(top: 5.0),
                                   ),
-                                  Container(
-                                    child: TextFormField(
-                                      keyboardType: TextInputType.emailAddress,
-                                      controller: emailController,
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        color: Color(0xFF000000),
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor:
-                                            Colors.white.withOpacity(0.1),
-                                        hintText: 'Enter Email',
-                                        hintStyle: TextStyle(
-                                            fontSize: 13, color: Colors.grey),
-                                        // prefixIcon: Icon(Icons.email, color: Color(0xFF466d1d)),
-
-                                        enabledBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
-                                        ),
-                                        // Customize the focused border
-                                        focusedBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
-                                        ),
-                                      ),
-                                      textInputAction: TextInputAction.next,
-                                      validator: (value) {
-                                        RegExp regex = RegExp(
-                                            r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$');
-                                        if (value == null || value.isEmpty) {
-                                          return 'Please Enter your Email ';
-                                        } else if (!regex.hasMatch(value)) {
-                                          return 'Enter according to format';
-                                        }
-                                        return null;
-                                      },
+                                  TextFormField(
+                                    keyboardType: TextInputType.emailAddress,
+                                    controller: emailController,
+                                    style: const TextStyle(
+                                      fontSize: 13,
+                                      color: Color(0xFF000000),
+                                      fontWeight: FontWeight.w600,
                                     ),
+                                    decoration: InputDecoration(
+                                      filled: true,
+                                      fillColor: Colors.white.withOpacity(0.1),
+                                      hintText: 'Enter Email',
+                                      hintStyle: const TextStyle(
+                                          fontSize: 13, color: Colors.grey),
+                                      // prefixIcon: Icon(Icons.email, color: Color(0xFF466d1d)),
+
+                                      enabledBorder: const UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            width: 1, color: Color(0xFF466d1d)),
+                                      ),
+                                      // Customize the focused border
+                                      focusedBorder: const UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            width: 1, color: Color(0xFF466d1d)),
+                                      ),
+                                    ),
+                                    textInputAction: TextInputAction.next,
+                                    validator: (value) {
+                                      RegExp regex = RegExp(
+                                          r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$');
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please Enter your Email ';
+                                      } else if (!regex.hasMatch(value)) {
+                                        return 'Enter according to format';
+                                      }
+                                      return null;
+                                    },
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                  const Padding(
+                                    padding: EdgeInsets.all(8.0),
                                   ),
                                   const Text('Password',
                                       style: TextStyle(
@@ -157,8 +152,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                         color: Color(0xFF000000),
                                         fontWeight: FontWeight.bold,
                                       )),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 5.0),
+                                  const Padding(
+                                    padding: EdgeInsets.only(top: 5.0),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(top: 0),
@@ -169,15 +164,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                         filled: true,
                                         fillColor:
                                             Colors.white.withOpacity(0.1),
-                                        enabledBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
+                                        enabledBorder:
+                                            const UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                              width: 1,
+                                              color: Color(0xFF466d1d)),
                                         ),
                                         // Customize the focused border
-                                        focusedBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
+                                        focusedBorder:
+                                            const UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                              width: 1,
+                                              color: Color(0xFF466d1d)),
                                         ),
                                         hintText: ' Enter Password',
-                                        hintStyle: TextStyle(
+                                        hintStyle: const TextStyle(
                                             fontSize: 13, color: Colors.grey),
                                         suffixIcon: IconButton(
                                           icon: Icon(
@@ -193,7 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ),
                                       ),
                                       textInputAction: TextInputAction.next,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 13,
                                           color: Color(0xFF000000),
                                           fontWeight: FontWeight.w600),
@@ -208,20 +209,22 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Align(
                                     alignment: Alignment.centerRight,
                                     child: TextButton(
-                                        child: Text(
-                                          'Forgot Password?',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        style: TextButton.styleFrom(
-                                          primary: Color(0xFFF44336),
-                                        ),
-                                        onPressed: () {
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ForgotPasswordScreen()));
-                                        }),
+                                      style: TextButton.styleFrom(
+                                        foregroundColor:
+                                            const Color(0xFFF44336),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ForgotPasswordScreen()));
+                                      },
+                                      child: const Text(
+                                        'Forgot Password?',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
                                   ),
                                   Align(
                                     alignment: Alignment.center,
@@ -229,13 +232,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                       padding: const EdgeInsets.only(top: 5),
                                       child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
-                                            primary: Color(0xFF5DBB63),
-                                            onPrimary: Colors.white,
+                                            backgroundColor:
+                                                const Color(0xFF5DBB63),
+                                            foregroundColor: Colors.white,
                                             elevation: 8,
                                             minimumSize: const Size(180, 50),
                                             maximumSize: const Size(180, 50),
                                           ),
-                                          child: Text(
+                                          child: const Text(
                                             'Login',
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
@@ -243,8 +247,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                             ),
                                           ),
                                           onPressed: () async {
-                                            if (loginFormKey.currentState!.validate()) {
-
+                                            if (loginFormKey.currentState!
+                                                .validate()) {
                                               //     try {
                                               //       final user = await _auth
                                               //           .signInWithEmailAndPassword(
@@ -256,13 +260,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                               //       _showLoggedInSnackbar();
                                               //       // Navigate to the next screen only if the user is registered
                                               //       if (user != null) {
-                                                      Navigator.pushReplacement(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (BuildContext
+                                              Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (BuildContext
                                                             context) =>
-                                                                HomeScreen()),
-                                                      );
+                                                        HomeScreen()),
+                                              );
                                               //       }
                                               //     } catch (e) {
                                               //       print(e);
@@ -279,10 +283,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                           }),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 10.0),
+                                  const Padding(
+                                    padding: EdgeInsets.only(top: 10.0),
                                   ),
-                                  Align(
+                                  const Align(
                                     alignment: Alignment.center,
                                     child: Text('or',
                                         style: TextStyle(
@@ -382,7 +386,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text("Don't have an account?"),
+                                      const Text("Don't have an account?"),
                                       TextButton(
                                         onPressed: () {
                                           Navigator.pushReplacement(
@@ -392,7 +396,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                       (BuildContext context) =>
                                                           SignUpScreen()));
                                         },
-                                        child: Text(
+                                        child: const Text(
                                           "Sign up",
                                           style: TextStyle(
                                             color: Colors

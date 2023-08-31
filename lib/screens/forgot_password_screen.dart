@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'loginScreen.dart';
+import './login_screen.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   @override
@@ -70,16 +70,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         MaterialPageRoute(builder: (context) => LoginScreen()),
                       );
                     },
-
                     child: Align(
                       alignment: Alignment.topRight,
                       child: Padding(
-                        padding: const EdgeInsets.only(top:50.0),
+                        padding: const EdgeInsets.only(top: 50.0),
                         child: Icon(Icons.close, color: Colors.grey),
                       ),
                     ),
                   ),
-
                   Padding(
                     padding: EdgeInsets.only(top: 90),
                   ),
@@ -162,7 +160,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                     ),
                                   ),
                                   contentPadding:
-                                  EdgeInsets.fromLTRB(8.0, 10.0, 5.0, 10.0),
+                                      EdgeInsets.fromLTRB(8.0, 10.0, 5.0, 10.0),
                                 ),
                                 validator: (value) {
                                   RegExp regex = RegExp(
@@ -202,8 +200,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                     ),
                                   ),
                                   onPressed: () async {
-                                    if (  loginFormKey
-                                        .currentState?.validate() ==
+                                    if (loginFormKey.currentState?.validate() ==
                                         true) {
                                       ShowAlert();
                                     }
