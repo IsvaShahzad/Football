@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         Duration(seconds: 3),
             () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => CarouselScreen())));
+            context, MaterialPageRoute(builder: (context) => LoginScreen())));
   }
   @override
   Widget build(BuildContext context) {

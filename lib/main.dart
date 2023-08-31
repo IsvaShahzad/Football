@@ -35,14 +35,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xFFFFFFFF),
         primarySwatch: Colors.green,
-        inputDecorationTheme: const InputDecorationTheme(
-          enabledBorder: OutlineInputBorder(
+        inputDecorationTheme: InputDecorationTheme(
+          // Customize the enabled border
+          enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
-            borderRadius: BorderRadius.all(Radius.circular(20)),
           ),
-          focusedBorder: OutlineInputBorder(
+          // Customize the focused border
+          focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
-            borderRadius: BorderRadius.all(Radius.circular(20)),
           ),
         ),
       ),

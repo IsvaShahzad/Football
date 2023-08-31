@@ -24,27 +24,28 @@ class _LoginScreenState extends State<LoginScreen> {
   late String password;
   late bool isLogin;
   final GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
-
-  Future<void> _loginWithGoogle() async {
-    try {
-      final GoogleSignInAccount? googleSignInAccount =
-          await googleSignIn.signIn();
-
-      if (googleSignInAccount != null) {
-        // Successfully logged in
-        print("Logged in with Google: ${googleSignInAccount.displayName}");
-      }
-    } catch (error) {
-      print("Google login error: $error");
-    }
-  }
+  //
+  // Future<void> _loginWithGoogle() async {
+  //   try {
+  //     final GoogleSignInAccount? googleSignInAccount =
+  //         await googleSignIn.signIn();
+  //
+  //     if (googleSignInAccount != null) {
+  //       // Successfully logged in
+  //       print("Logged in with Google: ${googleSignInAccount.displayName}");
+  //     }
+  //   } catch (error) {
+  //     print("Google login error: $error");
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/images/l.jpg"), fit: BoxFit.cover)),
+              image: AssetImage("assets/images/greeb_login.jpeg"),
+              fit: BoxFit.cover)),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Form(
@@ -56,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 150.0),
+                      padding: const EdgeInsets.only(top: 165.0),
                     ),
                     const Align(
                         alignment: Alignment.topLeft,
@@ -64,27 +65,37 @@ class _LoginScreenState extends State<LoginScreen> {
                           'Football Club ⚽\nLogin to Continue',
                           style: TextStyle(
                             fontSize: 25,
-                            color: Colors.white,
+                            color: Colors.green,
                             fontWeight: FontWeight.bold,
                           ),
                         )),
                     Padding(
-                      padding: const EdgeInsets.only(top: 20.0),
+                      padding: const EdgeInsets.only(top: 30.0),
                     ),
                     Container(
-                        height: 500,
+                        height: 380,
                         decoration: BoxDecoration(
-                            color: Colors.white54,
-                            border: Border.all(
-                              color: Color(0xFF97C1A9),
-                              width: 1.5,
+                          color: Colors.white,
+                          border: Border.all(
+                            color: Colors.transparent,
+                            width: 1.5,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.zero),
+                          boxShadow: [
+                            BoxShadow(
+                              color:
+                                  Colors.black.withOpacity(0.2), // Shadow color
+                              spreadRadius: 2, // Spread radius
+                              blurRadius: 12, // Blur radius
+                              offset: Offset(
+                                  0, 3), // Offset in (x,y) from the container
                             ),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20))),
+                          ],
+                        ),
                         child: SingleChildScrollView(
                           child: Padding(
                             padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
+                                const EdgeInsets.symmetric(horizontal: 15.0),
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -115,12 +126,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                         hintText: 'Enter Email',
                                         hintStyle: TextStyle(
                                             fontSize: 13, color: Colors.grey),
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20)),
-                                          borderSide: BorderSide(
-                                              width: 3,
-                                              color: Color(0xFF5DBB63)),
+                                        // prefixIcon: Icon(Icons.email, color: Color(0xFF466d1d)),
+
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
+                                        ),
+                                        // Customize the focused border
+                                        focusedBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
                                         ),
                                       ),
                                       textInputAction: TextInputAction.next,
@@ -157,10 +170,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                         filled: true,
                                         fillColor:
                                             Colors.white.withOpacity(0.1),
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(20),
-                                          ),
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
+                                        ),
+                                        // Customize the focused border
+                                        focusedBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
                                         ),
                                         hintText: ' Enter Password',
                                         hintStyle: TextStyle(
@@ -220,7 +235,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                             elevation: 8,
                                             minimumSize: const Size(180, 50),
                                             maximumSize: const Size(180, 50),
-                                            shape: StadiumBorder(),
                                           ),
                                           child: Text(
                                             'Login',
@@ -279,9 +293,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                           color: Colors.red,
                                         )),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 10.0),
-                                  ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.only(top: 5.0),
+                                  // ),
                                   // Align(
                                   //   alignment: Alignment.center,
                                   //   child: ElevatedButton(
@@ -310,63 +324,63 @@ class _LoginScreenState extends State<LoginScreen> {
                                   //         //             Registration()));
                                   //       }),
                                   // ),
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: ElevatedButton.icon(
-                                      onPressed: () async {
-                                        final result =
-                                            await FacebookAuth.instance.login();
-
-                                        if (result.status ==
-                                            LoginStatus.success) {
-                                          final accessToken =
-                                              result.accessToken;
-                                          // Use the accessToken for further actions
-                                          print(
-                                              "Logged in with Facebook: ${accessToken?.token}");
-                                        } else if (result.status ==
-                                            LoginStatus.cancelled) {
-                                          print("Facebook login cancelled");
-                                        } else {
-                                          print("Facebook login error");
-                                        }
-                                      },
-                                      icon: Image.asset(
-                                        "assets/images/fb_icon.png",
-                                        width: 24,
-                                        height: 27,
-                                      ),
-                                      label: Text("Login with Facebook"),
-                                      style: ElevatedButton.styleFrom(
-                                        primary:
-                                            Colors.blue, // Facebook blue color
-                                        onPrimary: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 5.0),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: ElevatedButton.icon(
-                                      onPressed: _loginWithGoogle,
-                                      icon: Image.asset(
-                                        "assets/images/google.png",
-                                        width: 44,
-                                        height: 24,
-                                      ),
-                                      label: Text("Login with Google"),
-                                      style: ElevatedButton.styleFrom(
-                                        primary: Color(
-                                            0xFF4cbb17), // Gmail red color
-                                        onPrimary: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 10.0),
-                                  ),
+                                  // Align(
+                                  //   alignment: Alignment.center,
+                                  //   child: ElevatedButton.icon(
+                                  //     onPressed: () async {
+                                  //       final result =
+                                  //           await FacebookAuth.instance.login();
+                                  //
+                                  //       if (result.status ==
+                                  //           LoginStatus.success) {
+                                  //         final accessToken =
+                                  //             result.accessToken;
+                                  //         // Use the accessToken for further actions
+                                  //         print(
+                                  //             "Logged in with Facebook: ${accessToken?.token}");
+                                  //       } else if (result.status ==
+                                  //           LoginStatus.cancelled) {
+                                  //         print("Facebook login cancelled");
+                                  //       } else {
+                                  //         print("Facebook login error");
+                                  //       }
+                                  //     },
+                                  //     icon: Image.asset(
+                                  //       "assets/images/fb_icon.png",
+                                  //       width: 24,
+                                  //       height: 27,
+                                  //     ),
+                                  //     label: Text("Login with Facebook"),
+                                  //     style: ElevatedButton.styleFrom(
+                                  //       primary:
+                                  //           Colors.blue, // Facebook blue color
+                                  //       onPrimary: Colors.white,
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.only(top: 5.0),
+                                  // ),
+                                  // Align(
+                                  //   alignment: Alignment.center,
+                                  //   child: ElevatedButton.icon(
+                                  //     onPressed: _loginWithGoogle,
+                                  //     icon: Image.asset(
+                                  //       "assets/images/google.png",
+                                  //       width: 44,
+                                  //       height: 24,
+                                  //     ),
+                                  //     label: Text("Login with Google"),
+                                  //     style: ElevatedButton.styleFrom(
+                                  //       primary: Color(
+                                  //           0xFF4cbb17), // Gmail red color
+                                  //       onPrimary: Colors.white,
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.only(top: 5.0),
+                                  // ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
