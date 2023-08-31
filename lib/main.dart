@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'InitialScreens/SplashScreen.dart';
+import 'screens/splash_screen.dart';
 
 void main() async {
   if (kIsWeb || defaultTargetPlatform == TargetPlatform.macOS) {
@@ -23,19 +23,21 @@ void main() async {
 }
 
 String prettyPrint(Map json) {
-  JsonEncoder encoder = new JsonEncoder.withIndent('  ');
+  JsonEncoder encoder = const JsonEncoder.withIndent('  ');
   String pretty = encoder.convert(json);
   return pretty;
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xFFFFFFFF),
         primarySwatch: Colors.green,
-        inputDecorationTheme: InputDecorationTheme(
+        inputDecorationTheme: const InputDecorationTheme(
           // Customize the enabled border
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
@@ -46,7 +48,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: SplashScreen(),
+      home: const SplashScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

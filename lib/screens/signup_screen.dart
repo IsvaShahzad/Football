@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'loginScreen.dart';
+import './login_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -28,11 +27,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               image: DecorationImage(
                   image: AssetImage("assets/images/greeb_login.jpeg"),
                   fit: BoxFit.cover)),
-
           child: Scaffold(
               backgroundColor: Colors.transparent,
-
-
               body: Container(
                   child: SingleChildScrollView(
                       child: Padding(
@@ -60,18 +56,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         height: 550,
                         // width: 370,
                         decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                              color: Colors.transparent,
-                              width: 1.5,
-                            ),
-                            borderRadius:
-                                BorderRadius.all(Radius.zero),
-
+                          color: Colors.white,
+                          border: Border.all(
+                            color: Colors.transparent,
+                            width: 1.5,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.zero),
                           boxShadow: [
                             BoxShadow(
                               color:
-                              Colors.black.withOpacity(0.2), // Shadow color
+                                  Colors.black.withOpacity(0.2), // Shadow color
                               spreadRadius: 2, // Spread radius
                               blurRadius: 12, // Blur radius
                               offset: Offset(
@@ -113,11 +107,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       hintStyle: TextStyle(
                                           fontSize: 13, color: Colors.grey),
                                       enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
+                                        borderSide: BorderSide(
+                                            width: 1, color: Color(0xFF466d1d)),
                                       ),
                                       // Customize the focused border
                                       focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
+                                        borderSide: BorderSide(
+                                            width: 1, color: Color(0xFF466d1d)),
                                       ),
                                     ),
                                     validator: (value) {
@@ -159,11 +155,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       hintStyle: TextStyle(
                                           fontSize: 13, color: Colors.grey),
                                       enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
+                                        borderSide: BorderSide(
+                                            width: 1, color: Color(0xFF466d1d)),
                                       ),
                                       // Customize the focused border
                                       focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
+                                        borderSide: BorderSide(
+                                            width: 1, color: Color(0xFF466d1d)),
                                       ),
                                     ),
                                     validator: (value) {
@@ -205,11 +203,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       hintStyle: TextStyle(
                                           fontSize: 13, color: Colors.grey),
                                       enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
+                                        borderSide: BorderSide(
+                                            width: 1, color: Color(0xFF466d1d)),
                                       ),
                                       // Customize the focused border
                                       focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
+                                        borderSide: BorderSide(
+                                            width: 1, color: Color(0xFF466d1d)),
                                       ),
                                     ),
                                     validator: (value) {
@@ -243,11 +243,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     filled: true,
                                     fillColor: Colors.white.withOpacity(0.1),
                                     enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
+                                      borderSide: BorderSide(
+                                          width: 1, color: Color(0xFF466d1d)),
                                     ),
                                     // Customize the focused border
                                     focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
+                                      borderSide: BorderSide(
+                                          width: 1, color: Color(0xFF466d1d)),
                                     ),
                                     hintText: ' Enter Password',
                                     hintStyle: TextStyle(
@@ -303,11 +305,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       hintStyle: TextStyle(
                                           fontSize: 13, color: Colors.grey),
                                       enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
+                                        borderSide: BorderSide(
+                                            width: 1, color: Color(0xFF466d1d)),
                                       ),
                                       // Customize the focused border
                                       focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
+                                        borderSide: BorderSide(
+                                            width: 1, color: Color(0xFF466d1d)),
                                       ),
                                     ),
                                     validator: (value) {
