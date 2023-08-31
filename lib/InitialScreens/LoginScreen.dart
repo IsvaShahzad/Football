@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
-import 'CaroselSliderScreen.dart';
+import '../MainScreens/HomeScreen.dart';
 import 'ForgotPasswordScreen.dart';
 import 'SignUpScreen.dart';
 
@@ -244,9 +243,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                             ),
                                           ),
                                           onPressed: () async {
-                                            if (loginFormKey.currentState
-                                                    ?.validate() ==
-                                                true) {
+                                            if (loginFormKey.currentState!.validate()) {
+
                                               //     try {
                                               //       final user = await _auth
                                               //           .signInWithEmailAndPassword(
@@ -258,25 +256,25 @@ class _LoginScreenState extends State<LoginScreen> {
                                               //       _showLoggedInSnackbar();
                                               //       // Navigate to the next screen only if the user is registered
                                               //       if (user != null) {
-                                              //         Navigator.pushReplacement(
-                                              //           context,
-                                              //           MaterialPageRoute(
-                                              //               builder: (BuildContext
-                                              //               context) =>
-                                              //                   ContinueAsScreen()),
-                                              //         );
+                                                      Navigator.pushReplacement(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (BuildContext
+                                                            context) =>
+                                                                HomeScreen()),
+                                                      );
                                               //       }
                                               //     } catch (e) {
                                               //       print(e);
                                               // Display an error message to the user
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  content: Text(
-                                                      'User not found. Please check your email and password.'),
-                                                  backgroundColor: Colors.red,
-                                                ),
-                                              );
+                                              // ScaffoldMessenger.of(context)
+                                              //     .showSnackBar(
+                                              //   SnackBar(
+                                              //     content: Text(
+                                              //         'User not found. Please check your email and password.'),
+                                              //     backgroundColor: Colors.red,
+                                              //   ),
+                                              // );
                                             }
                                           }),
                                     ),

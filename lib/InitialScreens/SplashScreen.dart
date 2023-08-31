@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:project_football/InitialScreens/CaroselSliderScreen.dart';
 
 import 'LoginScreen.dart';
 

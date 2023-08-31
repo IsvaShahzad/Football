@@ -31,27 +31,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
           child: Scaffold(
               backgroundColor: Colors.transparent,
-              // appBar: AppBar(
-              //   elevation: 13,
-              //   shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.only(
-              //           bottomRight: Radius.circular(12),
-              //           bottomLeft: Radius.circular(12))),
-              //   actions: <Widget>[
-              //     IconButton(
-              //         icon: Icon(
-              //           Icons.logout,
-              //           color: Colors.white,
-              //         ),
-              //         onPressed: () {
-              //           Navigator.pushReplacement(
-              //               context,
-              //               MaterialPageRoute(
-              //                   builder: (context) => LoginScreen()));
-              //         }),
-              //
-              //   ],
-              // ),
+
 
               body: Container(
                   child: SingleChildScrollView(
