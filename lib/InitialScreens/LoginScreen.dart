@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+
 import '../MainScreens/HomeScreen.dart';
 import 'ForgotPasswordScreen.dart';
 import 'SignUpScreen.dart';
@@ -22,21 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   late String email;
   late String password;
   late bool isLogin;
-  final GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
-  //
-  // Future<void> _loginWithGoogle() async {
-  //   try {
-  //     final GoogleSignInAccount? googleSignInAccount =
-  //         await googleSignIn.signIn();
-  //
-  //     if (googleSignInAccount != null) {
-  //       // Successfully logged in
-  //       print("Logged in with Google: ${googleSignInAccount.displayName}");
-  //     }
-  //   } catch (error) {
-  //     print("Google login error: $error");
-  //   }
-  // }
+
 
   @override
   Widget build(BuildContext context) {
@@ -263,18 +248,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                             context) =>
                                                                 HomeScreen()),
                                                       );
-                                              //       }
-                                              //     } catch (e) {
-                                              //       print(e);
-                                              // Display an error message to the user
-                                              // ScaffoldMessenger.of(context)
-                                              //     .showSnackBar(
-                                              //   SnackBar(
-                                              //     content: Text(
-                                              //         'User not found. Please check your email and password.'),
-                                              //     backgroundColor: Colors.red,
-                                              //   ),
-                                              // );
+
                                             }
                                           }),
                                     ),
@@ -291,94 +265,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           color: Colors.red,
                                         )),
                                   ),
-                                  // Padding(
-                                  //   padding: const EdgeInsets.only(top: 5.0),
-                                  // ),
-                                  // Align(
-                                  //   alignment: Alignment.center,
-                                  //   child: ElevatedButton(
-                                  //       style: ElevatedButton.styleFrom(
-                                  //         primary: Color(0xFF5DBB63),
-                                  //         onPrimary: Colors.white,
-                                  //         shape: new RoundedRectangleBorder(
-                                  //           borderRadius:
-                                  //               new BorderRadius.circular(30.0),
-                                  //         ),
-                                  //         elevation: 8,
-                                  //         minimumSize: const Size(180, 50),
-                                  //         maximumSize: const Size(180, 50),
-                                  //       ),
-                                  //       child: Text('Sign Up',
-                                  //           style: TextStyle(
-                                  //             fontWeight: FontWeight.bold,
-                                  //             fontSize: 18,
-                                  //           )),
-                                  //       onPressed: () async {
-                                  //         // Navigator.pushReplacement(
-                                  //         //     context,
-                                  //         //     MaterialPageRoute(
-                                  //         //         builder:
-                                  //         //             (BuildContext context) =>
-                                  //         //             Registration()));
-                                  //       }),
-                                  // ),
-                                  // Align(
-                                  //   alignment: Alignment.center,
-                                  //   child: ElevatedButton.icon(
-                                  //     onPressed: () async {
-                                  //       final result =
-                                  //           await FacebookAuth.instance.login();
-                                  //
-                                  //       if (result.status ==
-                                  //           LoginStatus.success) {
-                                  //         final accessToken =
-                                  //             result.accessToken;
-                                  //         // Use the accessToken for further actions
-                                  //         print(
-                                  //             "Logged in with Facebook: ${accessToken?.token}");
-                                  //       } else if (result.status ==
-                                  //           LoginStatus.cancelled) {
-                                  //         print("Facebook login cancelled");
-                                  //       } else {
-                                  //         print("Facebook login error");
-                                  //       }
-                                  //     },
-                                  //     icon: Image.asset(
-                                  //       "assets/images/fb_icon.png",
-                                  //       width: 24,
-                                  //       height: 27,
-                                  //     ),
-                                  //     label: Text("Login with Facebook"),
-                                  //     style: ElevatedButton.styleFrom(
-                                  //       primary:
-                                  //           Colors.blue, // Facebook blue color
-                                  //       onPrimary: Colors.white,
-                                  //     ),
-                                  //   ),
-                                  // ),
-                                  // Padding(
-                                  //   padding: const EdgeInsets.only(top: 5.0),
-                                  // ),
-                                  // Align(
-                                  //   alignment: Alignment.center,
-                                  //   child: ElevatedButton.icon(
-                                  //     onPressed: _loginWithGoogle,
-                                  //     icon: Image.asset(
-                                  //       "assets/images/google.png",
-                                  //       width: 44,
-                                  //       height: 24,
-                                  //     ),
-                                  //     label: Text("Login with Google"),
-                                  //     style: ElevatedButton.styleFrom(
-                                  //       primary: Color(
-                                  //           0xFF4cbb17), // Gmail red color
-                                  //       onPrimary: Colors.white,
-                                  //     ),
-                                  //   ),
-                                  // ),
-                                  // Padding(
-                                  //   padding: const EdgeInsets.only(top: 5.0),
-                                  // ),
+
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
