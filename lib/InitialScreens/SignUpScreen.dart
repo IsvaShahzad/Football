@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 
+import '../MainScreens/HomeScreen.dart';
 import 'loginScreen.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -11,7 +13,7 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   bool _isObscure = true;
 
-  final _formKey = GlobalKey<FormState>();
+  final loginFormKey = GlobalKey<FormState>();
 
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
@@ -22,7 +24,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _formKey,
+      key: loginFormKey,
       child: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
@@ -327,57 +329,48 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                                 Align(
                                   alignment: Alignment.center,
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Color(0xFF5DBB63),
-                                      onPrimary: Colors.white,
-                                      elevation: 12,
-                                      minimumSize: const Size(200, 50),
-                                      maximumSize: const Size(200, 50),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 5),
+                                    child: Stack(
+                                      children: [
+                                        Shimmer.fromColors(
+                                          baseColor: Colors.green, // Shimmer base color
+                                          highlightColor: Colors.lightGreen, // Shimmer highlight color
+                                          child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              primary: Color(0xFF5DBB63), // Button color
+                                              onPrimary: Colors.white, // Text color
+                                              elevation: 8,
+                                              minimumSize: const Size(180, 50),
+                                              maximumSize: const Size(180, 50),
+                                            ),
+                                            onPressed: () async {
+                                              if (loginFormKey.currentState!.validate()) {
+                                                Navigator.pushReplacement(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (BuildContext context) => LoginScreen(),
+                                                  ),
+                                                );
+                                              }
+                                            },
+                                            child: Container(), // Empty container as a placeholder
+                                          ),
+                                        ),
+                                        Positioned.fill(
+                                          child: Center(
+                                            child: Text(
+                                              'Sign Up',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    child: Text(
-                                      'Sign Up',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18,
-                                      ),
-                                    ),
-                                    onPressed: () async {
-                                      if (_formKey.currentState?.validate() ==
-                                          true) {
-                                        // try {
-                                        //   final newUser = await _auth.createUserWithEmailAndPassword(
-                                        //     email: emailController.text,
-                                        //     password: passwordController.text,
-                                        //   );
-                                        //
-                                        //   final user = (await _auth.signInWithEmailAndPassword(
-                                        //     email: emailController.text,
-                                        //     password: passwordController.text,
-                                        //   ))
-                                        //       .user;
-                                        //
-                                        //   await FirebaseFirestore.instance.collection('users').doc(user?.uid).set({
-                                        //     'id': user?.uid,
-                                        //     'firstname': firstNameController.text,
-                                        //     'lastname': lastNameController.text,
-                                        //     'mobile': mobileController.text,
-                                        //     'isAdmin': false,
-                                        //     'isApproved': false,
-                                        //     'email': user?.email,
-                                        //   });
-                                        //
-                                        //   print(newUser);
-                                        //
-                                        //   Navigator.pushReplacement(
-                                        //     context,
-                                        //     MaterialPageRoute(builder: (BuildContext context) => VerifyEmail()),
-                                        //   );
-                                        // } catch (e) {
-                                        //   print(e);
-                                        // }
-                                      }
-                                    },
                                   ),
                                 ),
                                 Align(

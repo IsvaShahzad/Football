@@ -3,6 +3,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:project_football/InitialScreens/LoginScreen.dart';
 import 'package:project_football/MainScreens/HomeScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shimmer/shimmer.dart';
+
+import '../Widgets/ProfileWidgets.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -22,7 +25,6 @@ class MapScreenState extends State<ProfilePage>
   bool _status = true;
   String email = "";
 
-  // final FocusNode myFocusNode = FocusNode();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController mobileController = TextEditingController();
@@ -30,35 +32,17 @@ class MapScreenState extends State<ProfilePage>
   final TextEditingController stateController = TextEditingController();
 
   late XFile file;
-  var _isLoading = false;
-  ShowAlert() {
-    return showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text("Profile updated! "),
-        actions: <Widget>[
-          Align(
-            alignment: Alignment.center,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xFFAB47BC),
-                onPrimary: Colors.white,
-                elevation: 3,
-                minimumSize: const Size(150, 50),
-                maximumSize: const Size(150, 50),
-                shape: StadiumBorder(),
-              ),
-              child: Text('OK',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => ProfilePage()));
-              },
-            ),
-          )
-        ],
-      ),
-    );
+
+  void toggleStatus() {
+    setState(() {
+      _status = !_status; // Toggle _status
+    });
+  }
+
+  void ShowAlert() {
+    ProfileAlert.showProfileUpdatedAlert(context, () {
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfilePage()));
+    });
   }
 
   @override
@@ -113,28 +97,7 @@ class MapScreenState extends State<ProfilePage>
                           },
                         ),
                       ),
-                      // new Container(
-                      //   color: Colors.transparent,
-                      //   child: new Column(
-                      //     children: <Widget>[
-                      //       Padding(
-                      //         padding: EdgeInsets.only(top: 0.0),
-                      //         child: new Stack(
-                      //             fit: StackFit.loose,
-                      //             children: <Widget>[
-                      //               Padding(
-                      //                   padding: EdgeInsets.only(
-                      //                       top: 90.0, right: 100.0),
-                      //                   child: new Row(
-                      //                     mainAxisAlignment:
-                      //                         MainAxisAlignment.center,
-                      //                     children: <Widget>[],
-                      //                   )),
-                      //             ]),
-                      //       )
-                      //     ],
-                      //   ),
-                      // ),
+
                       new Container(
 
                         child: Padding(
@@ -491,6 +454,7 @@ class MapScreenState extends State<ProfilePage>
 
 
 
+
   Widget _getActionButtons() {
     return Padding(
       padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
@@ -501,50 +465,81 @@ class MapScreenState extends State<ProfilePage>
           Expanded(
             child: Padding(
               padding: EdgeInsets.only(right: 10.0),
-              child: Container(
-                  child: new ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Color(0xFF357a38),
-                  onPrimary: Colors.white,
-                  shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(5.0),
+              child: Stack(
+                children: [
+                  Shimmer.fromColors(
+                    baseColor: Colors.green,
+                    highlightColor: Colors.lightGreen,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.0),
+                        gradient: LinearGradient(
+                          colors: [Color(0xFF5EEC62), Color(0xFF3FA534)],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                      ),
+                      height: 50,
+                    ),
                   ),
-                  elevation: 5,
-                  minimumSize: const Size(130, 50),
-                  maximumSize: const Size(130, 50),
-                ),
-                child: new Text("Save"),
-                // textColor: Colors.white,
-                // color: Colors.green,is
-
-                onPressed: saveSellerProfile,
-              )),
+                  Container(
+                    height: 50,
+                    alignment: Alignment.center,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.transparent, // Set the button's background to transparent
+                        onPrimary: Colors.transparent, // Set the text color to transparent
+                        elevation: 0, // Remove elevation
+                      ),
+                      onPressed: saveSellerProfile,
+                      child: Text("Save", style: TextStyle(color: Colors.white)),
+                    ),
+                  ),
+                ],
+              ),
             ),
             flex: 2,
           ),
           Expanded(
             child: Padding(
               padding: EdgeInsets.only(left: 10.0),
-              child: Container(
-                  child: new ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Color(0xFF357a38),
-                  onPrimary: Colors.white,
-                  shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(5.0),
+              child: Stack(
+                children: [
+                  Shimmer.fromColors(
+                    baseColor: Colors.green,
+                    highlightColor: Colors.lightGreen,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.0),
+                        gradient: LinearGradient(
+                          colors: [Color(0xFF5EEC62), Color(0xFF3FA534)],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                      ),
+                      height: 50,
+                    ),
                   ),
-                  elevation: 5,
-                  minimumSize: const Size(130, 50),
-                  maximumSize: const Size(130, 50),
-                ),
-                child: new Text("Cancel"),
-                onPressed: () {
-                  setState(() {
-                    _status = true;
-                    FocusScope.of(context).requestFocus(new FocusNode());
-                  });
-                },
-              )),
+                  Container(
+                    height: 50,
+                    alignment: Alignment.center,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.transparent, // Set the button's background to transparent
+                        onPrimary: Colors.transparent, // Set the text color to transparent
+                        elevation: 0, // Remove elevation
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _status = true;
+                          FocusScope.of(context).requestFocus(new FocusNode());
+                        });
+                      },
+                      child: Text("Cancel", style: TextStyle(color: Colors.white)),
+                    ),
+                  ),
+                ],
+              ),
             ),
             flex: 2,
           ),

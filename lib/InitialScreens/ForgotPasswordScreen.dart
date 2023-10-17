@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shimmer/shimmer.dart';
 
 import 'loginScreen.dart';
 
@@ -186,28 +187,45 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               alignment: Alignment.center,
                               child: Padding(
                                 padding: const EdgeInsets.only(top: 5),
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Color(0xFF5DBB63),
-                                    onPrimary: Colors.white,
-                                    elevation: 11,
-                                    minimumSize: const Size(160, 50),
-                                    maximumSize: const Size(160, 50),
-                                  ),
-                                  child: Text(
-                                    'Send Link',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
+                                child: Stack(
+                                  children: [
+                                    Shimmer.fromColors(
+                                      baseColor: Colors.green, // Shimmer base color
+                                      highlightColor: Colors.lightGreen, // Shimmer highlight color
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          primary: Color(0xFF5DBB63), // Button color
+                                          onPrimary: Colors.white, // Text color
+                                          elevation: 8,
+                                          minimumSize: const Size(180, 50),
+                                          maximumSize: const Size(180, 50),
+                                        ),
+                                        onPressed: () async {
+                                          if (loginFormKey.currentState!.validate()) {
+                                            Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (BuildContext context) => LoginScreen(),
+                                              ),
+                                            );
+                                          }
+                                        },
+                                        child: Container(), // Empty container as a placeholder
+                                      ),
                                     ),
-                                  ),
-                                  onPressed: () async {
-                                    if (  loginFormKey
-                                        .currentState?.validate() ==
-                                        true) {
-                                      ShowAlert();
-                                    }
-                                  },
+                                    Positioned.fill(
+                                      child: Center(
+                                        child: Text(
+                                          'Send link',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
