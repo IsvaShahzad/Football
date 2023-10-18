@@ -467,21 +467,17 @@ class MapScreenState extends State<ProfilePage>
               padding: EdgeInsets.only(right: 10.0),
               child: Stack(
                 children: [
-                  Shimmer.fromColors(
-                    baseColor: Colors.green,
-                    highlightColor: Colors.lightGreen,
-                    child: Container(
+
+                  Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5.0),
-                        gradient: LinearGradient(
-                          colors: [Color(0xFF5EEC62), Color(0xFF3FA534)],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
+                          color: Colors.green,
+
+
                       ),
                       height: 50,
                     ),
-                  ),
+
                   Container(
                     height: 50,
                     alignment: Alignment.center,
@@ -505,21 +501,14 @@ class MapScreenState extends State<ProfilePage>
               padding: EdgeInsets.only(left: 10.0),
               child: Stack(
                 children: [
-                  Shimmer.fromColors(
-                    baseColor: Colors.green,
-                    highlightColor: Colors.lightGreen,
-                    child: Container(
+                   Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5.0),
-                        gradient: LinearGradient(
-                          colors: [Color(0xFF5EEC62), Color(0xFF3FA534)],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
+                       color: Colors.green,
                       ),
                       height: 50,
                     ),
-                  ),
+
                   Container(
                     height: 50,
                     alignment: Alignment.center,

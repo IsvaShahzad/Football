@@ -7,25 +7,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'InitialScreens/SplashScreen.dart';
 
 void main() async {
-  if (kIsWeb || defaultTargetPlatform == TargetPlatform.macOS) {
-    // initialiaze the facebook javascript SDK
-    // await FacebookAuth.instance.webAndDesktopInitialize(
-    //   appId: "1329834907365798",
-    //   cookie: true,
-    //   xfbml: true,
-    //   version: "v15.0",
-    // );
-  }
+
   WidgetsFlutterBinding.ensureInitialized();
   ScreenUtil.init; // Initialize ScreenUtil
   runApp(MyApp());
 }
 
-String prettyPrint(Map json) {
-  JsonEncoder encoder = new JsonEncoder.withIndent('  ');
-  String pretty = encoder.convert(json);
-  return pretty;
-}
 
 class MyApp extends StatelessWidget {
   @override

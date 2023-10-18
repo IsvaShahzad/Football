@@ -23,8 +23,8 @@ class DrawerItems extends StatelessWidget {
             ),
           ),
           onTap: () {
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => HomeScreen()));
+            // Navigator.pushReplacement(
+            //     context, MaterialPageRoute(builder: (context) => HomeScreen()));
           },
         ),
         Divider(),

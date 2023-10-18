@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:project_football/InitialScreens/SignUpScreen.dart';
 import 'package:project_football/MainScreens/ProfileScreen.dart';
 
+
 import '../InitialScreens/LoginScreen.dart';
 import '../Widgets/Listtiles.dart';
+import '../Api/api_service.dart';
+import '../Api/ModelClass.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -11,9 +14,27 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late List<Welcome>? _userModel = []; //create a list of api_service
+
   @override
   void initState() {
     super.initState();
+    _getData();
+  }
+
+  void _getData() async {
+    try {
+      final users = await ApiService().getUsers();
+      if (users != null) {
+        setState(() {
+          _userModel = users;
+        });
+      } else {
+        print('no response');
+      }
+    } catch (e) {
+      print("Error: $e");
+    }
   }
 
   @override
@@ -93,13 +114,24 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/green_pastel.jpg"),
-            fit: BoxFit.cover,
-          ),
-        ),
+      body:
+          // _userModel == null || _userModel!.isEmpty
+          //     ? const Center(
+          //         child: CircularProgressIndicator(),
+          //       )
+          //     : ListView.builder(
+          //         itemCount: _userModel!.length,
+          //         itemBuilder: (context, index) {
+          //           return Card(
+          //               child: Column(children: [
+          //             Row(
+          //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //               children: [
+          //                 Text(_userModel![index].id.toString()),
+          //                 Text(_userModel![index].username),
+          //               ],
+          //             ),
+          Container(
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -114,17 +146,29 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
+              Padding(
+                padding: EdgeInsets.only(right: 165, bottom: 10),
+                child: Text(
+                  'What are you looking for?',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+
               // Static grid that won't scroll
               GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 0.0,
-                  mainAxisSpacing: 5.0,
+                  // crossAxisSpacing: 3.0,
                 ),
-                itemCount: 4, // Number of grid items
-                physics:
-                    NeverScrollableScrollPhysics(), // Make it non-scrollable
-                shrinkWrap: true, // Wrap content tightly
+                itemCount: 4,
+                // Number of grid items
+                physics: NeverScrollableScrollPhysics(),
+                // Make it non-scrollable
+                shrinkWrap: true,
+                // Wrap content tightly
                 itemBuilder: (BuildContext context, int index) {
                   // Define separate titles and asset images for each item
                   List<String> titles = [
@@ -146,17 +190,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       if (index == 0) {
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => ProfilePage()),
+                          MaterialPageRoute(
+                              builder: (context) => ProfilePage()),
                         );
                       } else if (index == 1) {
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => SignUpScreen()),
+                          MaterialPageRoute(
+                              builder: (context) => SignUpScreen()),
                         );
                       } else if (index == 2) {
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => LoginScreen()),
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()),
                         );
                       } else if (index == 3) {
                         Navigator.pushReplacement(
@@ -166,60 +213,73 @@ class _HomeScreenState extends State<HomeScreen> {
                       }
                     },
                     child: GridItem(
-                      image: images[index], // Use the image path from the list
+                      image: images[index],
+                      // Use the image path from the list
                       title: titles[index], // Use the title from the list
                     ),
                   );
-
                 },
               ),
               Padding(
                 padding: EdgeInsets.only(top: 30),
+                child: Stack(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 30, left: 13),
+                      child: Text(
+                        'Happening Right Now:',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 13, left: 290),
+                      child: TextButton(
+                        onPressed: () {
+                          // Define the onPressed function for the "View all" button
+                          print(
+                              "View All button clicked!"); // This is a sample action
+                        },
+                        child: Text(
+                          'View all',
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Roboto',
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30),
                 child: Padding(
-                  padding: EdgeInsets.all(16), // You can adjust the padding
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Happening Right Now:',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
+                  padding: EdgeInsets.only(bottom: 13, top: 0),
+                  child: Container(
+                    height: 350,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
                         color: Colors.black,
+                        width: 0.5,
+                      ),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(5),
+                        topRight: Radius.circular(5),
+                        bottomLeft: Radius.circular(5),
+                        bottomRight: Radius.circular(5),
                       ),
                     ),
                   ),
                 ),
               ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30),
-
-                  child: Container(
-
-                    height: 350,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: Colors.transparent,
-                        width: 1.5,
-                      ),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                        bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
-                          spreadRadius: 2,
-                          blurRadius: 12,
-                          offset: Offset(0, 3),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-
             ],
           ),
         ),
@@ -236,46 +296,48 @@ class GridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(16),
-          topRight: Radius.circular(16),
-          bottomLeft: Radius.circular(16),
-          bottomRight: Radius.circular(16),
-        ),
-      ),
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: ClipRRect(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
-                bottomLeft: Radius.circular(16),
-                bottomRight: Radius.circular(16),
-              ),
-              child: Image.asset(
-                image,
-                fit: BoxFit.cover,
-              ),
-            ),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(5),
+            topRight: Radius.circular(5),
+            bottomLeft: Radius.circular(5),
+            bottomRight: Radius.circular(5),
           ),
-          Container(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(
-              child: Text(
-                title,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+        ),
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(5),
+                  topRight: Radius.circular(5),
+                  bottomLeft: Radius.circular(5),
+                  bottomRight: Radius.circular(5),
+                ),
+                child: Image.asset(
+                  image,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
-          ),
-        ],
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

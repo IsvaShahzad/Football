@@ -23,7 +23,6 @@ class _LoginScreenState extends State<LoginScreen> {
   late String password;
   late bool isLogin;
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -114,11 +113,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                         // prefixIcon: Icon(Icons.email, color: Color(0xFF466d1d)),
 
                                         enabledBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
+                                          borderSide: BorderSide(
+                                              width: 1,
+                                              color: Color(0xFF466d1d)),
                                         ),
                                         // Customize the focused border
                                         focusedBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
+                                          borderSide: BorderSide(
+                                              width: 1,
+                                              color: Color(0xFF466d1d)),
                                         ),
                                       ),
                                       textInputAction: TextInputAction.next,
@@ -156,11 +159,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                         fillColor:
                                             Colors.white.withOpacity(0.1),
                                         enabledBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
+                                          borderSide: BorderSide(
+                                              width: 1,
+                                              color: Color(0xFF466d1d)),
                                         ),
                                         // Customize the focused border
                                         focusedBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(width: 1, color: Color(0xFF466d1d)),
+                                          borderSide: BorderSide(
+                                              width: 1,
+                                              color: Color(0xFF466d1d)),
                                         ),
                                         hintText: ' Enter Password',
                                         hintStyle: TextStyle(
@@ -213,49 +220,43 @@ class _LoginScreenState extends State<LoginScreen> {
                                     alignment: Alignment.center,
                                     child: Padding(
                                       padding: const EdgeInsets.only(top: 5),
-                                      child: Stack(
-                                        children: [
-                                          Shimmer.fromColors(
-                                            baseColor: Colors.green, // Shimmer base color
-                                            highlightColor: Colors.lightGreen, // Shimmer highlight color
-                                            child: ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                primary: Color(0xFF5DBB63), // Button color
-                                                onPrimary: Colors.white, // Text color
-                                                elevation: 8,
-                                                minimumSize: const Size(180, 50),
-                                                maximumSize: const Size(180, 50),
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          primary:
+                                              Color(0xFF5DBB63), // Button color
+                                          onPrimary: Colors.white, // Text color
+                                          elevation: 8,
+                                          minimumSize: const Size(180, 50),
+                                          maximumSize: const Size(180, 50),
+                                        ),
+                                        onPressed: () async {
+                                          if (loginFormKey.currentState!
+                                              .validate()) {
+                                            Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        HomeScreen(),
                                               ),
-                                              onPressed: () async {
-                                                if (loginFormKey.currentState!.validate()) {
-                                                  Navigator.pushReplacement(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (BuildContext context) => HomeScreen(),
-                                                    ),
-                                                  );
-                                                }
-                                              },
-                                              child: Container(), // Empty container as a placeholder
+                                            );
+                                          }
+                                        },
+
+                                        child: Center(
+                                          child: Text(
+                                            'Login',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18,
+                                              color: Colors.white,
                                             ),
                                           ),
-                                          Positioned.fill(
-                                            child: Center(
-                                              child: Text(
-                                                'Login',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 18,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
+                                        ),
+// Empty container as a placeholder
                                       ),
                                     ),
                                   ),
-
                                   Padding(
                                     padding: const EdgeInsets.only(top: 10.0),
                                   ),
@@ -268,7 +269,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                           color: Colors.red,
                                         )),
                                   ),
-
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
