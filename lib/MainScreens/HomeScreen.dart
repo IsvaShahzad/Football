@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Builder(
           builder: (context) {
             return AppBar(
-              backgroundColor: Color(0xff78b075),
+              backgroundColor: Colors.green,
               elevation: 0,
               flexibleSpace: Container(),
               leading: IconButton(
@@ -161,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
               GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  // crossAxisSpacing: 3.0,
+                  childAspectRatio: 1.3, // Adjust the aspect ratio here
                 ),
                 itemCount: 4,
                 // Number of grid items
@@ -184,14 +184,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     "assets/images/ttournaments.jfif"
                   ];
 
+                   // Set the aspect ratio for a rectangle
+
                   return GestureDetector(
                     onTap: () {
-                      // Check the index and navigate accordingly
+
                       if (index == 0) {
+
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) => ProfilePage()),
+
                         );
                       } else if (index == 1) {
                         Navigator.pushReplacement(
@@ -292,35 +296,26 @@ class GridItem extends StatelessWidget {
   final String image;
   final String title;
 
-  GridItem({required this.image, required this.title});
 
+  GridItem({
+    required this.image,
+    required this.title,
+    // Set the desired height
+  });
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+    return Container(
+      // Set the desired width
+      height: 100, // Set the desired height
       child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(5),
-            topRight: Radius.circular(5),
-            bottomLeft: Radius.circular(5),
-            bottomRight: Radius.circular(5),
-          ),
-        ),
+        elevation: 0,
+        margin: EdgeInsets.all(0),
         child: Stack(
           children: [
             Positioned.fill(
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(5),
-                  topRight: Radius.circular(5),
-                  bottomLeft: Radius.circular(5),
-                  bottomRight: Radius.circular(5),
-                ),
-                child: Image.asset(
-                  image,
-                  fit: BoxFit.cover,
-                ),
+              child: Image.asset(
+                image,
+                fit: BoxFit.cover,
               ),
             ),
             Container(
@@ -341,4 +336,6 @@ class GridItem extends StatelessWidget {
       ),
     );
   }
+
 }
+

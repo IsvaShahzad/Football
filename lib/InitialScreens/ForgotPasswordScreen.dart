@@ -192,7 +192,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                     primary:
                                     Color(0xFF5DBB63), // Button color
                                     onPrimary: Colors.white, // Text color
-                                    elevation: 8,
                                     minimumSize: const Size(180, 50),
                                     maximumSize: const Size(180, 50),
                                   ),
