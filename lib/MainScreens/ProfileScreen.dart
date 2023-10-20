@@ -159,7 +159,7 @@ class MapScreenState extends State<ProfilePage>
                                         boxShadow: [
                                           BoxShadow(
                                             color: Colors.black.withOpacity(
-                                                0.2), // Shadow color
+                                                0.1), // Shadow color
                                             spreadRadius: 2, // Spread radius
                                             blurRadius: 12, // Blur radius
                                             offset: Offset(0,

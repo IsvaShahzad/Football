@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_football/MainScreens/BookingTeam.dart';
 import 'package:project_football/MainScreens/ProfileScreen.dart';
 
 import '../MainScreens/HomeScreen.dart';
@@ -58,15 +59,15 @@ class DrawerItems extends StatelessWidget {
             color: Colors.green,
           ),
           title: Text(
-            "Bookings",
+            "Book your ground",
             style: TextStyle(
                 color: Colors.black, fontWeight: FontWeight.bold),
           ),
           onTap: () {
-            // Navigator.pushReplacement(
-            //     context,
-            //     MaterialPageRoute(
-            //         builder: (context) => LoginScreen()));
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => BookTeam()));
           },
         ),
         Divider(),
@@ -97,7 +98,33 @@ class DrawerItems extends StatelessWidget {
           },
         ),
         Divider(),
+        ListTile(
+          tileColor: Colors.white60,
+          trailing: Icon(
+            Icons.monetization_on_sharp,
+            size: 18,
+            color: Colors.green,
+          ),
+          title: Text(
+            "Join a team",
+            style: TextStyle(
+                color: Colors.black, fontWeight: FontWeight.bold),
+          ),
+          onTap: () async {
 
+
+            // Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //         builder: (context) => PostingDisplayedScreen(
+            //           addedposting: {
+            //             'All Requirements': addedrequirements,
+            //           },
+            //           id: 'id',
+            //         )));
+          },
+        ),
+        Divider(),
         ListTile(
           tileColor: Colors.white60,
           trailing: Icon(

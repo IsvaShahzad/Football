@@ -61,3 +61,33 @@ class ProfileAlert {
   }
 }
 
+
+class BookingAlert {
+  static void showBookingAlert(BuildContext context, Function onOKPressed) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text("Booking Successful!"),
+        actions: <Widget>[
+          Align(
+            alignment: Alignment.center,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.green,
+                onPrimary: Colors.white,
+                elevation: 3,
+                minimumSize: const Size(150, 50),
+                maximumSize: const Size(150, 50),
+              ),
+              child: Text('OK', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+              onPressed: () {
+
+                Navigator.of(context).pop();
+              },
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
