@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_football/InitialScreens/SignUpScreen.dart';
+import 'package:project_football/MainScreens/BookGround.dart';
+import 'package:project_football/MainScreens/BookingsDone.dart';
 import 'package:project_football/MainScreens/ProfileScreen.dart';
 
 
@@ -7,6 +9,7 @@ import '../InitialScreens/LoginScreen.dart';
 import '../Widgets/Listtiles.dart';
 import '../Api/api_service.dart';
 import '../Api/ModelClass.dart';
+import '';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -14,12 +17,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late List<Welcome>? _userModel = []; //create a list of api_service
+  // late List<Welcome>? _userModel = []; //create a list of api_service
 
   @override
   void initState() {
     super.initState();
-    _getData();
+    // _getData();
   }
 
   void _getData() async {
@@ -27,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
       final users = await ApiService().getUsers();
       if (users != null) {
         setState(() {
-          _userModel = users;
+          // _userModel = users;
         });
       } else {
         print('no response');
@@ -103,9 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: <Widget>[
               Container(
                 height: 80.0,
-                child: DrawerHeader(
-                  child: null,
-                ),
+
               ),
               DrawerItems(), // You can customize this
               Divider(),
@@ -114,7 +115,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body:
           // _userModel == null || _userModel!.isEmpty
           //     ? const Center(
           //         child: CircularProgressIndicator(),
@@ -131,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
           //                 Text(_userModel![index].username),
           //               ],
           //             ),
-          Container(
+          body: Container(
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -284,6 +284,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
+              TextButton(
+                onPressed: () {
+                  // Navigate to the Booking Screen
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => BookTeam()), // Replace BookingScreen with the actual screen you want to navigate to
+                  );
+                },
+                child: Text(
+                  'Book Now',
+                  style: TextStyle(
+                    color: Colors.blue, // Customize the button text color
+                    fontSize: 16, // Customize the font size
+                  ),
+                ),
+              )
+
             ],
           ),
         ),

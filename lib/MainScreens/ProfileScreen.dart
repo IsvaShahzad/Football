@@ -12,7 +12,6 @@ class ProfilePage extends StatefulWidget {
   MapScreenState createState() => MapScreenState();
 }
 
-final _formKey = GlobalKey<FormState>();
 
 late String _name = "";
 late String _email = "";
@@ -75,9 +74,9 @@ class MapScreenState extends State<ProfilePage>
           ),
           body: Container(
             decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("assets/images/green_pastel.jpg"),
-                    fit: BoxFit.cover)),
+              image: DecorationImage(
+                  image: AssetImage("assets/images/green_pastel.jpg"),
+                  fit: BoxFit.cover)),
             child: Form(
               // color: Colors.white,
               child: new ListView(

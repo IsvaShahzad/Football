@@ -13,7 +13,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool _isObscure = true;
 
-  final loginFormKey = GlobalKey<FormState>();
+  final LoginFormKey = GlobalKey<FormState>();
 
   final TextEditingController emailController = TextEditingController();
 
@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Form(
-            key: loginFormKey,
+            key: LoginFormKey,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: SingleChildScrollView(
@@ -229,7 +229,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           maximumSize: const Size(180, 50),
                                         ),
                                         onPressed: () async {
-                                          if (loginFormKey.currentState!
+                                          if (LoginFormKey.currentState!
                                               .validate()) {
                                             Navigator.pushReplacement(
                                               context,

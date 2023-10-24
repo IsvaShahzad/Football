@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../MainScreens/BookGround.dart';
+
 class ProfileWidgets extends StatefulWidget {
   final VoidCallback onEditPressed;
 
@@ -91,3 +93,11 @@ class BookingAlert {
     );
   }
 }
+void resetForm() {
+  // Reset the form fields or variables to their initial state
+  nameController.text = "";
+  hoursController.text = "";
+  dateinput.text = "";
+  groundController.text = "";
+}
+

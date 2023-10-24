@@ -10,7 +10,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
-  final loginFormKey = GlobalKey<FormState>();
+  final loginformKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
 
   ShowAlert() {
@@ -57,7 +57,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Form(
-          key: loginFormKey,
+          key: loginformKey,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 21),
             child: SingleChildScrollView(
@@ -196,7 +196,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                     maximumSize: const Size(180, 50),
                                   ),
                                   onPressed: () async {
-                                    if (loginFormKey.currentState!
+                                    if (loginformKey.currentState!
                                         .validate()) {
                                       Navigator.pushReplacement(
                                         context,

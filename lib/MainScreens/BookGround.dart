@@ -3,20 +3,44 @@ import 'package:image_picker/image_picker.dart';
 import 'package:project_football/MainScreens/HomeScreen.dart';
 import 'package:intl/intl.dart';
 import '../Widgets/ProfileWidgets.dart';
+import 'BookingsDone.dart';
+
+
+final TextEditingController nameController = TextEditingController();
+final TextEditingController groundController = TextEditingController();
+final TextEditingController hoursController = TextEditingController();
+final TextEditingController dateinput = TextEditingController();
+
 
 class BookTeam extends StatefulWidget {
   @override
   MapScreenState createState() => MapScreenState();
 }
+late String _selectedValue ;
+late String _selectedHours;
 
-final _formKey = GlobalKey<FormState>();
+class BookingData with ChangeNotifier {
+
+  String name = nameController.text;
+  String selectedValue = _selectedValue;
+  String selectedHours = _selectedHours;
+  String date = dateinput.text;
+
+  void updateBookingData(
+      String name, String selectedValue, String selectedHours, String date) {
+    this.name = nameController.text;
+    this.selectedValue = _selectedValue;
+    this.selectedHours = _selectedHours;
+    this.date = dateinput.text;
+    notifyListeners();
+  }
+}
 
 late String _name = "";
 late String _email = "";
 late String _mobile = "";
 late String _pincode = "";
 late String _state = "";
-
 
 List<String> categoryOptions = [
   'Ayub Park',
@@ -33,21 +57,12 @@ List<String> hoursOptions = [
   '10:00-11:30',
   '1:00-2:30',
 ];
-late String _selectedValue;
-late String _selectedHours;
-
 
 
 class MapScreenState extends State<BookTeam>
     with SingleTickerProviderStateMixin {
   bool _status = true;
   String email = "";
-
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController groundController = TextEditingController();
-  final TextEditingController hoursController = TextEditingController();
-  TextEditingController dateinput = TextEditingController();
-
 
   late XFile file;
 
@@ -64,21 +79,12 @@ class MapScreenState extends State<BookTeam>
       resetForm();
     });
   }
-  void resetForm() {
-    // Reset the form fields or variables to their initial state
-    nameController.text = "";
-    hoursController.text = "";
-    dateinput.text= "";
-    groundController.text = "";
-  }
-
 
   @override
   void initState() {
     super.initState();
     _selectedValue = categoryOptions[0];
     _selectedHours = hoursOptions[0];
-
   }
 
   @override
@@ -88,7 +94,7 @@ class MapScreenState extends State<BookTeam>
           backgroundColor: Colors.transparent,
           appBar: PreferredSize(
             preferredSize:
-            Size.fromHeight(0), // Set the AppBar's height to zero
+                Size.fromHeight(0), // Set the AppBar's height to zero
             child: AppBar(),
           ),
           body: Container(
@@ -129,11 +135,11 @@ class MapScreenState extends State<BookTeam>
                                   ),
                                   child: new Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
                                       new Column(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.start,
+                                            MainAxisAlignment.start,
                                         children: <Widget>[
                                           Padding(
                                             padding: EdgeInsets.only(top: 70),
@@ -148,7 +154,6 @@ class MapScreenState extends State<BookTeam>
                                           ),
                                         ],
                                       ),
-
                                     ],
                                   )),
                               Padding(
@@ -164,7 +169,7 @@ class MapScreenState extends State<BookTeam>
                                           width: 1.5,
                                         ),
                                         borderRadius:
-                                        BorderRadius.all(Radius.zero),
+                                            BorderRadius.all(Radius.zero),
                                         boxShadow: [
                                           BoxShadow(
                                             color: Colors.black.withOpacity(
@@ -188,18 +193,18 @@ class MapScreenState extends State<BookTeam>
                                               children: <Widget>[
                                                 Column(
                                                   mainAxisAlignment:
-                                                  MainAxisAlignment.start,
+                                                      MainAxisAlignment.start,
                                                   mainAxisSize:
-                                                  MainAxisSize.min,
+                                                      MainAxisSize.min,
                                                   children: <Widget>[
                                                     Text(
                                                       'Name',
                                                       style: TextStyle(
                                                         fontSize: 16.0,
                                                         fontWeight:
-                                                        FontWeight.bold,
+                                                            FontWeight.bold,
                                                         color:
-                                                        Color(0xFF357a38),
+                                                            Color(0xFF357a38),
                                                       ),
                                                     ),
                                                   ],
@@ -219,12 +224,12 @@ class MapScreenState extends State<BookTeam>
                                                   child: TextFormField(
                                                     controller: nameController,
                                                     decoration:
-                                                    const InputDecoration(
+                                                        const InputDecoration(
                                                       hintText:
-                                                      "Enter Your Name",
+                                                          "Enter Your Name",
                                                     ),
                                                     textInputAction:
-                                                    TextInputAction.next,
+                                                        TextInputAction.next,
                                                     validator: (value) {
                                                       if (value!.isEmpty) {
                                                         return 'Please enter your name';
@@ -232,27 +237,34 @@ class MapScreenState extends State<BookTeam>
                                                       return null;
                                                     },
                                                     onSaved: (value) =>
-                                                    _name = value!,
+                                                        _name = value!,
                                                   ),
                                                 ),
                                               ],
                                             ),
                                           ),
                                           Padding(
-                                            padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
+                                            padding: EdgeInsets.only(
+                                                left: 25.0,
+                                                right: 25.0,
+                                                top: 25.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: <Widget>[
                                                 Column(
-                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                  mainAxisSize: MainAxisSize.min,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
                                                   children: <Widget>[
                                                     Text(
                                                       'Select Ground /Field',
                                                       style: TextStyle(
                                                         fontSize: 16.0,
-                                                        fontWeight: FontWeight.bold,
-                                                        color: Color(0xFF357a38),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color:
+                                                            Color(0xFF357a38),
                                                       ),
                                                     ),
                                                   ],
@@ -261,44 +273,74 @@ class MapScreenState extends State<BookTeam>
                                             ),
                                           ),
                                           Padding(
-                                            padding: EdgeInsets.only(left: 0.0, right: 0.0, top: 2.0),
+                                            padding: EdgeInsets.only(
+                                                left: 0.0,
+                                                right: 0.0,
+                                                top: 2.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: <Widget>[
                                                 Padding(
-                                                  padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 2.0),
+                                                  padding: EdgeInsets.only(
+                                                      left: 25.0,
+                                                      right: 25.0,
+                                                      top: 2.0),
                                                   child: Row(
-                                                    mainAxisSize: MainAxisSize.max,
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
                                                     children: <Widget>[
                                                       SizedBox(
-                                                        width: 270, // Set the width to the desired value
-                                                        child: DropdownButtonFormField(
+                                                        width:
+                                                            270, // Set the width to the desired value
+                                                        child:
+                                                            DropdownButtonFormField(
                                                           value: _selectedValue,
-                                                          items: categoryOptions.map((category) {
+                                                          items: categoryOptions
+                                                              .map((category) {
                                                             return DropdownMenuItem(
                                                               value: category,
-                                                              child: Text(category),
+                                                              child: Text(
+                                                                  category),
                                                             );
                                                           }).toList(),
-                                                          decoration: InputDecoration(
+                                                          decoration:
+                                                              InputDecoration(
                                                             filled: true,
-                                                            fillColor: Colors.white.withOpacity(0.1),
-                                                            contentPadding: const EdgeInsets.symmetric(
+                                                            fillColor: Colors
+                                                                .white
+                                                                .withOpacity(
+                                                                    0.1),
+                                                            contentPadding:
+                                                                const EdgeInsets
+                                                                    .symmetric(
                                                               vertical: 15,
                                                               horizontal: 10.0,
                                                             ),
-                                                            hintStyle: TextStyle(
+                                                            hintStyle:
+                                                                TextStyle(
                                                               fontSize: 13,
-                                                              color: Colors.grey,
+                                                              color:
+                                                                  Colors.grey,
                                                             ),
-                                                            border: OutlineInputBorder(
-                                                              borderRadius: BorderRadius.all(Radius.circular(4)),
-                                                              borderSide: BorderSide(width: 1, color: Colors.orange),
+                                                            border:
+                                                                OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .all(Radius
+                                                                          .circular(
+                                                                              4)),
+                                                              borderSide: BorderSide(
+                                                                  width: 1,
+                                                                  color: Colors
+                                                                      .orange),
                                                             ),
                                                           ),
-                                                          onChanged: (selectedCategory) {
+                                                          onChanged:
+                                                              (selectedCategory) {
                                                             setState(() {
-                                                              _selectedValue = selectedCategory.toString();
+                                                              _selectedValue =
+                                                                  selectedCategory
+                                                                      .toString();
                                                             });
                                                           },
                                                         ),
@@ -309,7 +351,6 @@ class MapScreenState extends State<BookTeam>
                                               ],
                                             ),
                                           ),
-
                                           Padding(
                                               padding: EdgeInsets.only(
                                                   left: 25.0,
@@ -320,18 +361,18 @@ class MapScreenState extends State<BookTeam>
                                                 children: <Widget>[
                                                   new Column(
                                                     mainAxisAlignment:
-                                                    MainAxisAlignment.start,
+                                                        MainAxisAlignment.start,
                                                     mainAxisSize:
-                                                    MainAxisSize.min,
+                                                        MainAxisSize.min,
                                                     children: <Widget>[
                                                       new Text(
                                                         'Hours booked',
                                                         style: TextStyle(
                                                           fontSize: 16.0,
                                                           fontWeight:
-                                                          FontWeight.bold,
+                                                              FontWeight.bold,
                                                           color:
-                                                          Color(0xFF357a38),
+                                                              Color(0xFF357a38),
                                                         ),
                                                       ),
                                                     ],
@@ -347,19 +388,26 @@ class MapScreenState extends State<BookTeam>
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: <Widget>[
                                                   SizedBox(
-                                                    width: 270, // Set the width to the desired value
-                                                    child: DropdownButtonFormField(
+                                                    width:
+                                                        270, // Set the width to the desired value
+                                                    child:
+                                                        DropdownButtonFormField(
                                                       value: _selectedHours,
-                                                      items: hoursOptions.map((hours) {
+                                                      items: hoursOptions
+                                                          .map((hours) {
                                                         return DropdownMenuItem(
                                                           value: hours,
                                                           child: Text(hours),
                                                         );
                                                       }).toList(),
-                                                      decoration: InputDecoration(
+                                                      decoration:
+                                                          InputDecoration(
                                                         filled: true,
-                                                        fillColor: Colors.white.withOpacity(0.1),
-                                                        contentPadding: const EdgeInsets.symmetric(
+                                                        fillColor: Colors.white
+                                                            .withOpacity(0.1),
+                                                        contentPadding:
+                                                            const EdgeInsets
+                                                                .symmetric(
                                                           vertical: 15,
                                                           horizontal: 10.0,
                                                         ),
@@ -367,22 +415,32 @@ class MapScreenState extends State<BookTeam>
                                                           fontSize: 13,
                                                           color: Colors.grey,
                                                         ),
-                                                        border: OutlineInputBorder(
-                                                          borderRadius: BorderRadius.all(Radius.circular(4)),
-                                                          borderSide: BorderSide(width: 1, color: Colors.orange),
+                                                        border:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          4)),
+                                                          borderSide:
+                                                              BorderSide(
+                                                                  width: 1,
+                                                                  color: Colors
+                                                                      .orange),
                                                         ),
                                                       ),
-                                                      onChanged: (selectedHours) {
+                                                      onChanged:
+                                                          (selectedHours) {
                                                         setState(() {
-                                                          _selectedHours = selectedHours.toString();
+                                                          _selectedHours =
+                                                              selectedHours
+                                                                  .toString();
                                                         });
                                                       },
                                                     ),
                                                   )
                                                 ],
                                               )),
-
-
                                           Padding(
                                               padding: EdgeInsets.only(
                                                   left: 25.0,
@@ -393,18 +451,18 @@ class MapScreenState extends State<BookTeam>
                                                 children: <Widget>[
                                                   new Column(
                                                     mainAxisAlignment:
-                                                    MainAxisAlignment.start,
+                                                        MainAxisAlignment.start,
                                                     mainAxisSize:
-                                                    MainAxisSize.min,
+                                                        MainAxisSize.min,
                                                     children: <Widget>[
                                                       new Text(
                                                         'Select Date',
                                                         style: TextStyle(
                                                           fontSize: 16.0,
                                                           fontWeight:
-                                                          FontWeight.bold,
+                                                              FontWeight.bold,
                                                           color:
-                                                          Color(0xFF357a38),
+                                                              Color(0xFF357a38),
                                                         ),
                                                       ),
                                                     ],
@@ -412,7 +470,8 @@ class MapScreenState extends State<BookTeam>
                                                 ],
                                               )),
                                           Padding(
-                                            padding: const EdgeInsets.only(top: 0),
+                                            padding:
+                                                const EdgeInsets.only(top: 0),
                                             child: SizedBox(
                                               width: 275,
                                               child: TextFormField(
@@ -420,42 +479,51 @@ class MapScreenState extends State<BookTeam>
                                                 decoration: InputDecoration(
                                                   labelText: "",
                                                   border: OutlineInputBorder(
-                                                    borderRadius: BorderRadius.all(
+                                                    borderRadius:
+                                                        BorderRadius.all(
                                                       Radius.circular(10),
                                                     ),
                                                   ),
                                                   hintText: ' ',
                                                   prefixIcon: Padding(
-                                                    padding: const EdgeInsets.only(top: 10),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 10),
                                                     child: Icon(
                                                       Icons.calendar_today,
                                                       // Adjust the icon's size and color as needed
                                                       size: 24,
-                                                      color: Colors.grey, // Change the color to your desired color
+                                                      color: Colors
+                                                          .grey, // Change the color to your desired color
                                                     ),
                                                   ),
                                                 ),
                                                 readOnly: true,
-                                                  onTap: () async {
-                                                    DateTime? pickedDate = await showDatePicker(
-                                                        context: context,
-                                                        initialDate: DateTime.now(),
-                                                        firstDate: DateTime(1950),
-                                                        //DateTime.now() - not to allow to choose before today.
-                                                        lastDate: DateTime(2100));
+                                                onTap: () async {
+                                                  DateTime? pickedDate =
+                                                      await showDatePicker(
+                                                          context: context,
+                                                          initialDate:
+                                                              DateTime.now(),
+                                                          firstDate:
+                                                              DateTime(1950),
+                                                          //DateTime.now() - not to allow to choose before today.
+                                                          lastDate:
+                                                              DateTime(2100));
 
-                                                    if (pickedDate != null) {
-                                                      print(
-                                                          pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
-                                                      String formattedDate =
-                                                      DateFormat('dd-MM-yyyy').format(pickedDate);
-                                                      print(
-                                                          formattedDate); //formatted date output using intl package =>  2021-03-16
-                                                      setState(() {
-                                                        dateinput.text =
-                                                            formattedDate; //set output date to TextField value.
-                                                      });
-                                                    } else {}
+                                                  if (pickedDate != null) {
+                                                    print(
+                                                        pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                                                    String formattedDate =
+                                                        DateFormat('dd-MM-yyyy')
+                                                            .format(pickedDate);
+                                                    print(
+                                                        formattedDate); //formatted date output using intl package =>  2021-03-16
+                                                    setState(() {
+                                                      dateinput.text =
+                                                          formattedDate; //set output date to TextField value.
+                                                    });
+                                                  } else {}
                                                   ;
                                                 },
                                                 style: TextStyle(
@@ -464,7 +532,8 @@ class MapScreenState extends State<BookTeam>
                                                   fontWeight: FontWeight.w600,
                                                 ),
                                                 validator: (value) {
-                                                  if (value == null || value.isEmpty) {
+                                                  if (value == null ||
+                                                      value.isEmpty) {
                                                     return 'Please Enter Some Text ';
                                                   }
                                                   return null;
@@ -475,24 +544,48 @@ class MapScreenState extends State<BookTeam>
                                           Align(
                                             alignment: Alignment.center,
                                             child: Padding(
-                                              padding: const EdgeInsets.only(top: 25),
+                                              padding: const EdgeInsets.only(
+                                                  top: 25),
                                               child: ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
-                                                  primary:
-                                                  Color(0xFF5DBB63), // Button color
-                                                  onPrimary: Colors.white, // Text color
-                                                  minimumSize: const Size(150, 45),
-                                                  maximumSize: const Size(150, 45),
+                                                  primary: Color(
+                                                      0xFF5DBB63), // Button color
+                                                  onPrimary: Colors
+                                                      .white, // Text color
+                                                  minimumSize:
+                                                      const Size(150, 45),
+                                                  maximumSize:
+                                                      const Size(150, 45),
                                                 ),
                                                 onPressed: () async {
+
+                                                  BookingsDone bookingData = BookingsDone(
+                                                      name: nameController.text,
+                                                      selectedValue: _selectedValue,
+                                                      selectedHours: _selectedHours,
+                                                      date: dateinput.text
+                                                  );
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          BookingsDone(
+                                                            // Pass the data from the BookingData instance
+                                                            name: bookingData.name,
+                                                            selectedValue: bookingData.selectedValue,
+                                                            selectedHours: bookingData.selectedHours,
+                                                            date: bookingData.date,
+                                                          ),
+                                                    ),
+                                                  );
                                                   ShowAlert();
                                                 },
-
                                                 child: Center(
                                                   child: Text(
                                                     'Book now',
                                                     style: TextStyle(
-                                                      fontWeight: FontWeight.bold,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                       fontSize: 18,
                                                       color: Colors.white,
                                                     ),
@@ -501,7 +594,6 @@ class MapScreenState extends State<BookTeam>
                                               ),
                                             ),
                                           ),
-
                                         ],
                                       )),
                                 ),
@@ -518,6 +610,4 @@ class MapScreenState extends State<BookTeam>
           )),
     );
   }
-
 }
-
