@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import 'BookGround.dart';
 
 class BookingsDone extends StatefulWidget {
   final String name;
+  final String date;
   final String selectedValue;
   final String selectedHours;
-  final String date;
+
 
   BookingsDone({
-  required this.name,
-  required this.selectedValue,
-  required this.selectedHours,
-  required this.date,
-});
+    required this.name,
+    required this.date,
+    required this.selectedHours,
+    required this.selectedValue,
 
-@override
-State<BookingsDone> createState() => _BookingsDoneState();
+  });
+
+  @override
+  State<BookingsDone> createState() => _BookingsDoneState();
 }
 
 class _BookingsDoneState extends State<BookingsDone> {
@@ -42,22 +45,21 @@ class _BookingsDoneState extends State<BookingsDone> {
                 Row(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(bottom: 70,left: 0),
+                      padding: EdgeInsets.only(bottom: 70, left: 0),
                       child: IconButton(
-                        icon: Icon(Icons.arrow_back,color: Colors.grey,),
+                        icon: Icon(Icons.arrow_back, color: Colors.grey),
                         onPressed: () {
-                          Navigator.of(context).pop(); // Navigate back
+                          Navigator.of(context).pop();
                         },
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top:108.0,left: 20),
+                      padding: const EdgeInsets.only(top: 108.0, left: 20),
                       child: Text(
-                        'Booking Details', // Add the title here
+                        'Booking Details',
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
-
                         ),
                       ),
                     ),
@@ -69,7 +71,7 @@ class _BookingsDoneState extends State<BookingsDone> {
                     padding: const EdgeInsets.symmetric(horizontal: 5.0),
                     child: Container(
                       height: 300,
-                      color: Colors.white, // Set the background color of the white container
+                      color: Colors.white,
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,10 +84,18 @@ class _BookingsDoneState extends State<BookingsDone> {
                             },
                           ),
                           ListTile(
-                            title: Text('Ground/Field: ${widget.selectedValue}'),
+                            title: Consumer<BookingData>(
+                              builder: (context, bookingData, child) {
+                                return Text('Ground/Field: ${bookingData.selectedValue ?? 'N/A'}');
+                              },
+                            ),
                           ),
                           ListTile(
-                            title: Text('Hours Booked: ${widget.selectedHours}'),
+                            title: Consumer<BookingData>(
+                              builder: (context, bookingData, child) {
+                                return Text('Hours Booked: ${bookingData.selectedHours ?? 'N/A'}');
+                              },
+                            ),
                           ),
                           ListTile(
                             title: Text('Date: ${widget.date}'),
