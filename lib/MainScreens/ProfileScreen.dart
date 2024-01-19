@@ -146,7 +146,7 @@ class MapScreenState extends State<ProfilePage>
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 17),
                                   child: Container(
-                                      height: 450,
+                                      height: 350,
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         border: Border.all(

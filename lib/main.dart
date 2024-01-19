@@ -16,7 +16,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => BookingData(
-
       ), // Provide an instance of BookingData
       child: MaterialApp(
         theme: ThemeData(

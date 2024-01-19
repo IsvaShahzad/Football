@@ -46,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     const Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          'Football Club ⚽\nLogin to Continue',
+                          'Sportify ⚽\nLogin to Continue',
                           style: TextStyle(
                             fontSize: 25,
                             color: Colors.green,

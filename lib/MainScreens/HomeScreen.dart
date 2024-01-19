@@ -115,23 +115,23 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-          // _userModel == null || _userModel!.isEmpty
-          //     ? const Center(
-          //         child: CircularProgressIndicator(),
-          //       )
-          //     : ListView.builder(
-          //         itemCount: _userModel!.length,
-          //         itemBuilder: (context, index) {
-          //           return Card(
-          //               child: Column(children: [
-          //             Row(
-          //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //               children: [
-          //                 Text(_userModel![index].id.toString()),
-          //                 Text(_userModel![index].username),
-          //               ],
-          //             ),
-          body: Container(
+      // _userModel == null || _userModel!.isEmpty
+      //     ? const Center(
+      //         child: CircularProgressIndicator(),
+      //       )
+      //     : ListView.builder(
+      //         itemCount: _userModel!.length,
+      //         itemBuilder: (context, index) {
+      //           return Card(
+      //               child: Column(children: [
+      //             Row(
+      //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //               children: [
+      //                 Text(_userModel![index].id.toString()),
+      //                 Text(_userModel![index].username),
+      //               ],
+      //             ),
+      body: Container(
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -162,21 +162,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: 1.3, // Adjust the aspect ratio here
+                  mainAxisSpacing: 8, // Add vertical spacing between cards
                 ),
                 itemCount: 4,
-                // Number of grid items
                 physics: NeverScrollableScrollPhysics(),
-                // Make it non-scrollable
                 shrinkWrap: true,
-                // Wrap content tightly
                 itemBuilder: (BuildContext context, int index) {
-                  // Define separate titles and asset images for each item
-                  List<String> titles = [
-                    "Matches",
-                    "Stadiums",
-                    "Teams",
-                    "Tournaments"
-                  ];
+                  List<String> titles = ["Matches", "Stadiums", "Teams", "Tournaments"];
                   List<String> images = [
                     "assets/images/matches.jfif",
                     "assets/images/sstadium.jfif",
@@ -184,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     "assets/images/ttournaments.jfif"
                   ];
 
-                   // Set the aspect ratio for a rectangle
+                  // Set the aspect ratio for a rectangle
 
                   return GestureDetector(
                     onTap: () {
@@ -313,46 +305,57 @@ class GridItem extends StatelessWidget {
   final String image;
   final String title;
 
-
   GridItem({
     required this.image,
     required this.title,
-    // Set the desired height
   });
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      // Set the desired width
-      height: 100, // Set the desired height
-      child: Card(
-        elevation: 0,
-        margin: EdgeInsets.all(0),
-        child: Stack(
-          children: [
-            Positioned.fill(
-              child: Image.asset(
-                image,
-                fit: BoxFit.cover,
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10), // Add rounded corners
+      ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 6),
+        child: Card(
+          elevation: 0, // Set elevation to 0 to avoid double shadows
+          margin: EdgeInsets.all(0),
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10), // Clip image to rounded corners
+                  child: Image.asset(
+
+                    image,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
-            ),
-          ],
+              Container(
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.vertical(
+                    bottom: Radius.circular(10), // Add rounded corners to the bottom
+                  ),
+
+                ),
+                child: Center(
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
-
 }
-

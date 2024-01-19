@@ -43,7 +43,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(top: 90.0),
+                        padding: EdgeInsets.only(top: 50.0),
                         child: const Align(
                             alignment: Alignment.center,
                             child: Text(
@@ -124,7 +124,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     ),
                                     validator: (value) {
                                       RegExp regex =
-                                          RegExp(r'^\(\d{3}\) \d{3}\-\d{4}$');
+                                          RegExp(r'^'
+                                          r'\(\d{3}\) \d{3}\-\d{4}$');
                                       if (value == null || value.isEmpty) {
                                         return 'Please Enter Some Text';
                                       } else if (value.length > 14) {
